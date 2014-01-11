@@ -10,13 +10,12 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 
 /**
  * @author Frank Chen Connector receives instructions/chat messages from
  *         opposing player's ChatClient
  */
-public class Connector {
+public class Connector extends Thread {
 	private ServerSocket serverSocket;
 
 	public Connector(int port) {
@@ -61,5 +60,11 @@ public class Connector {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+		int port = 9090;
+		Thread t = new Connector(port);
+		t.start();
 	}
 }

@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
  * @author Frank Chen
  * ChatClient sends instructions or chat message to the opposing player's Connector.
  */
-public class ChatClient {
+public class ChatClient extends Thread {
 	private Socket clientSocket;
 	private int port;
 	private String serverName;
@@ -58,5 +58,11 @@ public class ChatClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+		int port = 9090;
+		Thread t = new ChatClient("Blade", port);
+		t.start();
 	}
 }
