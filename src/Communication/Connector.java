@@ -1,8 +1,8 @@
 package Communication;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -38,22 +38,28 @@ public class Connector extends Thread {
 		try {
 			System.out.println("Waiting for client on port "
 					+ serverSocket.getLocalSocketAddress().toString() + "...");
-			// establishing connection
-			Socket server = serverSocket.accept();
-			System.out.println("Just connected to "
-					+ server.getRemoteSocketAddress());
 
-			// receiving request
-			DataInputStream in = new DataInputStream(server.getInputStream());
-			System.out.println(in.readUTF());
+			boolean stillConnected = true;
+			while (stillConnected) {
+				// establishing connection
+				Socket server = serverSocket.accept();
+				System.out.println("Just connected to "
+						+ server.getRemoteSocketAddress());
+				// receiving request
+				ObjectInputStream in = new ObjectInputStream(
+						server.getInputStream());
+				if (in != null) {
+					System.out.println(in.readUTF());
 
-			String reply = "";
-
-			// sending reply
-			DataOutputStream out = new DataOutputStream(
-					server.getOutputStream());
-			out.writeUTF("Thank you for connecting to "
-					+ server.getLocalSocketAddress() + "\n" + reply);
+					String reply = "";
+					// sending reply
+					DataOutputStream out = new DataOutputStream(
+							server.getOutputStream());
+					out.writeUTF("Thank you for connecting to "
+							+ server.getLocalSocketAddress() + "\n" + reply);
+				}
+				server.close();
+			}
 
 		} catch (SocketTimeoutException s) {
 			System.out.println("Socket timed out!");
@@ -61,9 +67,9 @@ public class Connector extends Thread {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
-		int port = 9090;
+		int port = 7777;
 		Thread t = new Connector(port);
 		t.start();
 	}
