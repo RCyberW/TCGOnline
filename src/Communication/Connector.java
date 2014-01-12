@@ -12,8 +12,9 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
 /**
- * @author Frank Chen Connector receives instructions/chat messages from
- *         opposing player's ChatClient
+ * @author Frank Chen
+ * @version 0.1
+ * @since 2014-01-01
  */
 public class Connector extends Thread {
 	private ServerSocket serverSocket;
@@ -48,16 +49,14 @@ public class Connector extends Thread {
 				// receiving request
 				ObjectInputStream in = new ObjectInputStream(
 						server.getInputStream());
-				if (in != null) {
-					System.out.println(in.readUTF());
+				System.out.println(in.readUTF());
 
-					String reply = "";
-					// sending reply
-					ObjectOutputStream out = new ObjectOutputStream(
-							server.getOutputStream());
-					out.writeUTF("Thank you for connecting to "
-							+ server.getLocalSocketAddress() + "\n" + reply);
-				}
+				String reply = "";
+				// sending reply
+				ObjectOutputStream out = new ObjectOutputStream(
+						server.getOutputStream());
+				out.writeUTF("Thank you for connecting to "
+						+ server.getLocalSocketAddress() + "\n" + reply);
 				server.close();
 			}
 

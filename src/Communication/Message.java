@@ -2,11 +2,16 @@ package Communication;
 
 import Profile.Player;
 
+/**
+ * @author Frank Chen
+ * @version 0.1
+ * @since 2014-01-01
+ */
 public class Message {
 
 	protected Player associatedPlayer;
 	protected String chatMessage;
-	
+
 	public Message(Player player) {
 		setAssociatedPlayer(player);
 	}
@@ -19,7 +24,8 @@ public class Message {
 	}
 
 	/**
-	 * @param chatMessage the chatMessage to set
+	 * @param chatMessage
+	 *            the chatMessage to set
 	 */
 	public void setChatMessage(String chatMessage) {
 		this.chatMessage = chatMessage;
@@ -33,12 +39,11 @@ public class Message {
 	}
 
 	/**
-	 * @param associatedPlayer the associatedPlayer to set
+	 * @param associatedPlayer
+	 *            the associatedPlayer to set
 	 */
 	public void setAssociatedPlayer(Player associatedPlayer) {
 		this.associatedPlayer = associatedPlayer;
 	}
-	
-	
-	
+
 }

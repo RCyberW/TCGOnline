@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import BuildDeck.Deck;
-import BuildDeck.Keyword;
 import Profile.Player;
 
 /**
  * @author Frank Chen
- * Game field representation
+ * @version 0.1
+ * @since 2014-01-01
  */
 public class Field {
 	private Player redPlayer;

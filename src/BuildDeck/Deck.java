@@ -7,7 +7,8 @@ import PlayGame.Zone;
 
 /**
  * @author Frank Chen
- * Deck representation
+ * @version 0.1
+ * @since 2014-01-01
  */
 public class Deck {
 	private HashMap<UUID, Zone> zoneMapping;

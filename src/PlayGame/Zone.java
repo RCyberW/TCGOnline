@@ -2,11 +2,10 @@ package PlayGame;
 
 import java.util.UUID;
 
-import BuildDeck.Keyword;
-
 /**
  * @author Frank Chen
- * Field zone representation
+ * @version 0.1
+ * @since 2014-01-01
  */
 public class Zone {
 	private Keyword zoneType;

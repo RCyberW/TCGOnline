@@ -1,11 +1,4 @@
 #################
-## Custom
-#################
-
-*.llog
-*.dec
-
-#################
 ## Eclipse
 #################
 
@@ -13,7 +6,6 @@
 .project
 .metadata
 bin/
-bin1/
 tmp/
 *.tmp
 *.bak
@@ -177,3 +169,5 @@ WeissSchwarzVirtual.jar
 nameDict.txt
 CardDatav2
 src/DeckBuilder/CardDatav2
+*.llog
+*.dec

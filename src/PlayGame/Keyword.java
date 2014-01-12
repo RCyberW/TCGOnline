@@ -1,7 +1,12 @@
-package BuildDeck;
+package PlayGame;
 
 import java.util.ArrayList;
 
+/**
+ * @author Frank Chen
+ * @version 0.1
+ * @since 2014-01-01
+ */
 public enum Keyword {
 	/** Field essentials */
 	LIBRARY("library", "deck"),
@@ -26,17 +31,33 @@ public enum Keyword {
 	BACK_ROW_5("back_5"),
 	
 	/** Game phases */
-	DRAW("draw"),
-	MAIN("main"),
+	DRAW_PHASE("draw_phase"),
+	MAIN_PHASE("main_phase"),
+	ATTACK_PHASE("attack_phase"),
+	END_PHASE("end_phase"),
+	
+	CLIMAX_PHASE("climax_phase"), // W/S
+	RESOURCE_PHASE("resource_phase"), // Z/X
+	IGNITION_PHASE("ignition_phase"), // Z/X
+	
+	/** Game actions */
+	DECK_TOP("top_of_deck"),
+	DECK_BOTTOM("bottom_of_deck"),
+	DECK_SEARCH("search_deck"),
+	DECK_SHUFFLE("shuffle_deck"),
+	DECK_DRAW("draw"),
+	
+	TRASH_SEARCH("search_trash", "search_grave", "search_waiting_room"),
+	TRASH_SALVAGE("return_from_waiting_room"),
+	
 	ATTACK("attack"),
-	DONE("done"),
 	
 	UNTAP("untap", "reboot", "stand"),
 	RESOURCE("resource"), // Z/X
 	IGNITION("ignition"), // Z/X
-	COUNTER("counter")
+	COUNTER("counter"),
 	
-	/** Game specific terms*/
+	/** Game specific terms */
 	;
 	
 	private ArrayList<String> commonTerms;
@@ -67,5 +88,4 @@ public enum Keyword {
 	public String toString() {
 		return selectedTerm;
 	}
-	
 }
