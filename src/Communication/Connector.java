@@ -1,8 +1,8 @@
 package Communication;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -53,7 +53,7 @@ public class Connector extends Thread {
 
 					String reply = "";
 					// sending reply
-					DataOutputStream out = new DataOutputStream(
+					ObjectOutputStream out = new ObjectOutputStream(
 							server.getOutputStream());
 					out.writeUTF("Thank you for connecting to "
 							+ server.getLocalSocketAddress() + "\n" + reply);

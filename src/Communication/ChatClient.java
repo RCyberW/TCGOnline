@@ -1,9 +1,9 @@
 package Communication;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -16,15 +16,13 @@ public class ChatClient extends Thread {
 	private Socket clientSocket;
 	private int port;
 	private String serverName;
+	private String messageToServer;
 	public ChatClient(String serverName, int port) {
 		this.port = port;
 		this.serverName = serverName;
 		try {
 			System.out.println("Connecting to " + serverName + " on port " + port);
 			clientSocket = new Socket(serverName, port);
-			System.out.println(clientSocket.getPort());
-			System.out.println("Just connected to "
-				+ clientSocket.getRemoteSocketAddress());
 
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -33,27 +31,28 @@ public class ChatClient extends Thread {
 		}
 	}
 	
+	public void writeMessage(String message) {
+		messageToServer = message;
+		
+	}
+	
 	public void run() {
-		serverName = "Cyber";
 		// String serverName = "174.77.36.43";
 		try {
-			System.out.println("Connecting to " + serverName + " on port "
-					+ port);
 			
 			// establishing connection
-			Socket client = new Socket(serverName, port);
-			System.out.println(client.getPort());
+			System.out.println(clientSocket.getPort());
 			System.out.println("Just connected to "
-					+ client.getRemoteSocketAddress());
+					+ clientSocket.getRemoteSocketAddress());
 			
 			// sending request
-			OutputStream outToServer = client.getOutputStream();
-			DataOutputStream out = new DataOutputStream(outToServer);
-			out.writeUTF("Hello from " + client.getLocalSocketAddress());
+			OutputStream outToServer = clientSocket.getOutputStream();
+			ObjectOutputStream out = new ObjectOutputStream(outToServer);
+			out.writeUTF(messageToServer);
 			
 			// receiving reply
-			InputStream inFromServer = client.getInputStream();
-			DataInputStream in = new DataInputStream(inFromServer);
+			InputStream inFromServer = clientSocket.getInputStream();
+			ObjectInputStream in = new ObjectInputStream(inFromServer);
 			System.out.println("Server says " + in.readUTF());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -61,8 +60,8 @@ public class ChatClient extends Thread {
 	}
 	
 	public static void main(String[] args) {
-		int port = 9090;
-		Thread t = new ChatClient("Blade", port);
+		int port = 7777;
+		Thread t = new ChatClient("10.0.0.14", port);
 		t.start();
 	}
 }
