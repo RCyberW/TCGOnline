@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import BuildDeck.Card;
 import PlayGame.Keyword;
-import PlayGame.KeywordInterpreter;
 import Profile.Player;
 
 /**
@@ -28,18 +27,6 @@ public class Instruction extends Message {
 		setKeyword(keyword);
 		setCard(card);
 		super.setChatMessage(chatMessage + keyword.toString());
-	}
-
-	public void processInstruction() {
-		// process the instruction on how the card is to be placed
-		switch (keyword) {
-		case DECK_DRAW:
-			KeywordInterpreter.draw();
-			break;
-		default:
-			break;
-
-		}
 	}
 
 	/**

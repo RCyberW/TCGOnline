@@ -61,4 +61,9 @@ public class Deck {
 		Card removedCard = cardMapping.get(card.getCardID());
 		return cardMapping.remove(removedCard);
 	}
+
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
 }
