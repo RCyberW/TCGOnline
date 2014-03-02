@@ -11,6 +11,8 @@ import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
+import PlayGame.InstructionInterpreter;
+
 /**
  * @author Frank Chen
  * @version 0.1
@@ -18,6 +20,8 @@ import java.net.UnknownHostException;
  */
 public class Connector extends Thread {
 	private ServerSocket serverSocket;
+	private Message messageToClient;
+	private InstructionInterpreter interpreter;
 
 	public Connector(int port) {
 		InetAddress addr;
@@ -27,12 +31,16 @@ public class Connector extends Thread {
 			serverSocket = new ServerSocket();
 			serverSocket.bind(endpoint);
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		interpreter = new InstructionInterpreter();
+	}
+
+	public void writeMessage(Message message) {
+		messageToClient = message;
+
 	}
 
 	public void run() {
@@ -46,23 +54,32 @@ public class Connector extends Thread {
 				Socket server = serverSocket.accept();
 				System.out.println("Just connected to "
 						+ server.getRemoteSocketAddress());
+
 				// receiving request
 				ObjectInputStream in = new ObjectInputStream(
 						server.getInputStream());
-				System.out.println(in.readUTF());
+				Message messageFromClient = (Message) in.readObject();
+				System.out.println(messageFromClient.toString());
+				
+				// read the message
+				if (messageFromClient.getType().equals("Message")) {
+					
+				} else {
+					interpreter.processInstruction((Instruction) messageFromClient);
+				}
 
-				String reply = "";
 				// sending reply
 				ObjectOutputStream out = new ObjectOutputStream(
 						server.getOutputStream());
-				out.writeUTF("Thank you for connecting to "
-						+ server.getLocalSocketAddress() + "\n" + reply);
+				out.writeObject(messageToClient);
 				server.close();
 			}
 
 		} catch (SocketTimeoutException s) {
 			System.out.println("Socket timed out!");
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

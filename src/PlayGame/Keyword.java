@@ -74,7 +74,7 @@ public enum Keyword {
 	}
 
 	/**
-	 * @param term the selected term this game uses
+	 * @param term the selected terminology this game uses
 	 */
 	public void setTerm(String term) {
 		if (commonTerms.contains(term)) {

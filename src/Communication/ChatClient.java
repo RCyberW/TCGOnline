@@ -8,6 +8,8 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import PlayGame.InstructionInterpreter;
+
 /**
  * @author Frank Chen
  * @version 0.1
@@ -17,7 +19,8 @@ public class ChatClient extends Thread {
 	private Socket clientSocket;
 	private int port;
 	private String serverName;
-	private String messageToServer;
+	private Message messageToServer;
+	private InstructionInterpreter interpreter;
 
 	public ChatClient(String serverName, int port) {
 		this.port = port;
@@ -32,9 +35,10 @@ public class ChatClient extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		interpreter = new InstructionInterpreter();
 	}
 
-	public void writeMessage(String message) {
+	public void writeMessage(Message message) {
 		messageToServer = message;
 
 	}
@@ -51,13 +55,23 @@ public class ChatClient extends Thread {
 			// sending request
 			OutputStream outToServer = clientSocket.getOutputStream();
 			ObjectOutputStream out = new ObjectOutputStream(outToServer);
-			out.writeUTF(messageToServer);
+			out.writeObject(messageToServer);
 
 			// receiving reply
 			InputStream inFromServer = clientSocket.getInputStream();
 			ObjectInputStream in = new ObjectInputStream(inFromServer);
-			System.out.println("Server says " + in.readUTF());
+			Message messageFromServer = (Message) in.readObject();
+			System.out.println("Server says " + messageFromServer.toString());
+			
+			// read the message
+			if (messageFromServer.getType().equals("Message")) {
+			} else {
+				interpreter.processInstruction((Instruction) messageFromServer);
+			}
+			
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

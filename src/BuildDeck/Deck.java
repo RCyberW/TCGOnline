@@ -62,7 +62,7 @@ public class Deck {
 		return cardMapping.remove(removedCard);
 	}
 
-	public void draw() {
+	public void draw(Card card) {
 		// TODO Auto-generated method stub
 		
 	}

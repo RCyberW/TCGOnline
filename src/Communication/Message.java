@@ -9,11 +9,13 @@ import Profile.Player;
  */
 public class Message {
 
-	protected Player associatedPlayer;
+	protected Player sourcePlayer;
+	protected Player targetPlayer;
 	protected String chatMessage;
-
-	public Message(Player player) {
-		setAssociatedPlayer(player);
+	
+	public Message(Player sourcePlayer, Player targetPlayer) {
+		setSourcePlayer(sourcePlayer);
+		setTargetPlayer(targetPlayer);
 	}
 
 	/**
@@ -34,16 +36,34 @@ public class Message {
 	/**
 	 * @return the associatedPlayer
 	 */
-	public Player getAssociatedPlayer() {
-		return associatedPlayer;
+	public Player getSourcePlayer() {
+		return sourcePlayer;
 	}
 
 	/**
 	 * @param associatedPlayer
 	 *            the associatedPlayer to set
 	 */
-	public void setAssociatedPlayer(Player associatedPlayer) {
-		this.associatedPlayer = associatedPlayer;
+	public void setSourcePlayer(Player associatedPlayer) {
+		this.sourcePlayer = associatedPlayer;
+	}
+
+	/**
+	 * @return the targetPlayer
+	 */
+	public Player getTargetPlayer() {
+		return targetPlayer;
+	}
+
+	/**
+	 * @param targetPlayer the targetPlayer to set
+	 */
+	public void setTargetPlayer(Player targetPlayer) {
+		this.targetPlayer = targetPlayer;
+	}
+	
+	public String getType() {
+		return "Message";
 	}
 
 }

@@ -17,8 +17,8 @@ public class Instruction extends Message {
 	private Card card;
 	private HashMap<String, String> instructionProperties;
 
-	public Instruction(Player player) {
-		super(player);
+	public Instruction(Player sourcePlayer, Player targetPlayer) {
+		super(sourcePlayer, targetPlayer);
 		// TODO Auto-generated constructor stub
 		setInstructionProperties(new HashMap<String, String>());
 	}
@@ -85,4 +85,8 @@ public class Instruction extends Message {
 		return instructionProperties.put(key, detail);
 	}
 
+	public String getType() {
+		return "Instruction";
+	}
+	
 }
