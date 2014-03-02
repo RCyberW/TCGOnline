@@ -13,6 +13,10 @@ import Profile.Player;
  */
 public class Instruction extends Message {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2509094028695992976L;
 	private Keyword keyword;
 	private Card card;
 	private HashMap<String, String> instructionProperties;

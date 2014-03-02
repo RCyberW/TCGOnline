@@ -1,5 +1,7 @@
 package Communication;
 
+import java.io.Serializable;
+
 import Profile.Player;
 
 /**
@@ -7,8 +9,12 @@ import Profile.Player;
  * @version 0.1
  * @since 2014-01-01
  */
-public class Message {
+public class Message implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2036222712652202681L;
 	protected Player sourcePlayer;
 	protected Player targetPlayer;
 	protected String chatMessage;

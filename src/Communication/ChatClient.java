@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import PlayGame.InstructionInterpreter;
+import PlayGame.Keyword;
 
 /**
  * @author Frank Chen
@@ -36,6 +37,9 @@ public class ChatClient extends Thread {
 			e.printStackTrace();
 		}
 		interpreter = new InstructionInterpreter();
+		Instruction testInstruction = new Instruction(null, null);
+		testInstruction.setKeyword(Keyword.FRONT_ROW_1);
+		writeMessage(testInstruction);
 	}
 
 	public void writeMessage(Message message) {
@@ -61,14 +65,20 @@ public class ChatClient extends Thread {
 			InputStream inFromServer = clientSocket.getInputStream();
 			ObjectInputStream in = new ObjectInputStream(inFromServer);
 			Message messageFromServer = (Message) in.readObject();
-			System.out.println("Server says " + messageFromServer.toString());
-			
-			// read the message
-			if (messageFromServer.getType().equals("Message")) {
+			if (messageFromServer == null) {
+
 			} else {
-				interpreter.processInstruction((Instruction) messageFromServer);
+				System.out.println("Server says "
+						+ messageFromServer.toString());
+
+				// read the message
+				if (messageFromServer.getType().equals("Message")) {
+				} else {
+					interpreter
+							.processInstruction((Instruction) messageFromServer);
+				}
 			}
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
