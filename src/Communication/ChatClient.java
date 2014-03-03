@@ -38,7 +38,7 @@ public class ChatClient extends Thread {
 		}
 		interpreter = new InstructionInterpreter();
 		Instruction testInstruction = new Instruction(null, null);
-		testInstruction.setKeyword(Keyword.FRONT_ROW_1);
+		testInstruction.setAction(Keyword.FRONT_ROW_1);
 		writeMessage(testInstruction);
 	}
 

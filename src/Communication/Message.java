@@ -68,6 +68,10 @@ public class Message implements Serializable{
 		this.targetPlayer = targetPlayer;
 	}
 	
+	public String toString() {
+		return "";
+	}
+	
 	public String getType() {
 		return "Message";
 	}

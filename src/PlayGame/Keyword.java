@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @since 2014-01-01
  */
 public enum Keyword {
-	/** Field essentials */
+	/** Field zone names */
 	LIBRARY("library", "deck"),
 	TRASH("trash", "grave", "waiting_room"),
 	MEMORY("out_of_game", "memory", "backyard"),
@@ -78,7 +78,7 @@ public enum Keyword {
 	 */
 	public void setTerm(String term) {
 		if (commonTerms.contains(term)) {
-			selectedTerm = term;
+			setSelectedTerm(term);
 		}
 	}
 	
@@ -86,6 +86,24 @@ public enum Keyword {
 	 * @return the String representation of the keyword
 	 */
 	public String toString() {
+		String terms = "";
+		for (String term : commonTerms) {
+			terms += term + " ";
+		}
+		return terms.trim();
+	}
+
+	/**
+	 * @return the selectedTerm
+	 */
+	public String getSelectedTerm() {
 		return selectedTerm;
+	}
+
+	/**
+	 * @param selectedTerm the selectedTerm to set
+	 */
+	public void setSelectedTerm(String selectedTerm) {
+		this.selectedTerm = selectedTerm;
 	}
 }

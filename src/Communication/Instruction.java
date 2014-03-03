@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import BuildDeck.Card;
 import PlayGame.Keyword;
+import PlayGame.Zone;
 import Profile.Player;
 
 /**
@@ -17,7 +18,9 @@ public class Instruction extends Message {
 	 * 
 	 */
 	private static final long serialVersionUID = 2509094028695992976L;
-	private Keyword keyword;
+	private Keyword action;
+	private Zone sourceZone;
+	private Zone targetZone;
 	private Card card;
 	private HashMap<String, String> instructionProperties;
 
@@ -27,25 +30,31 @@ public class Instruction extends Message {
 		setInstructionProperties(new HashMap<String, String>());
 	}
 
-	public void insertKeyword(Keyword keyword, Card card) {
-		setKeyword(keyword);
+	public void insertInstruction(Card card, Keyword action, Zone srcZone,
+			Zone trgZone) {
 		setCard(card);
-		super.setChatMessage(chatMessage + keyword.toString());
+		setAction(action);
+		setSourceZone(srcZone);
+		setTargetZone(trgZone);
+		super.setChatMessage(card.getProperties().get("Name") + " "
+				+ action.toString() + " FROM "
+				+ srcZone.getZoneType().toString() + " TO "
+				+ trgZone.getZoneType().toString());
 	}
 
 	/**
 	 * @return the keyword
 	 */
-	public Keyword getKeyword() {
-		return keyword;
+	public Keyword getAction() {
+		return action;
 	}
 
 	/**
 	 * @param keyword
 	 *            the keyword to set
 	 */
-	public void setKeyword(Keyword keyword) {
-		this.keyword = keyword;
+	public void setAction(Keyword keyword) {
+		this.action = keyword;
 	}
 
 	/**
@@ -92,5 +101,35 @@ public class Instruction extends Message {
 	public String getType() {
 		return "Instruction";
 	}
-	
+
+	/**
+	 * @return the sourceZone
+	 */
+	public Zone getSourceZone() {
+		return sourceZone;
+	}
+
+	/**
+	 * @param sourceZone
+	 *            the sourceZone to set
+	 */
+	public void setSourceZone(Zone sourceZone) {
+		this.sourceZone = sourceZone;
+	}
+
+	/**
+	 * @return the targetZone
+	 */
+	public Zone getTargetZone() {
+		return targetZone;
+	}
+
+	/**
+	 * @param targetZone
+	 *            the targetZone to set
+	 */
+	public void setTargetZone(Zone targetZone) {
+		this.targetZone = targetZone;
+	}
+
 }

@@ -2,6 +2,8 @@ package PlayGame;
 
 import java.util.UUID;
 
+import Profile.Player;
+
 /**
  * @author Frank Chen
  * @version 0.1
@@ -9,6 +11,7 @@ import java.util.UUID;
  */
 public class Zone {
 	private Keyword zoneType;
+	private Player associatedPlayer;
 	private UUID zoneID;
 
 	public Zone() {
@@ -42,5 +45,19 @@ public class Zone {
 	 */
 	public void setZoneID(UUID zoneID) {
 		this.zoneID = zoneID;
+	}
+
+	/**
+	 * @return the associatedPlayer
+	 */
+	public Player getAssociatedPlayer() {
+		return associatedPlayer;
+	}
+
+	/**
+	 * @param associatedPlayer the associatedPlayer to set
+	 */
+	public void setAssociatedPlayer(Player associatedPlayer) {
+		this.associatedPlayer = associatedPlayer;
 	}
 }

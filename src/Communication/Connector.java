@@ -59,13 +59,18 @@ public class Connector extends Thread {
 				ObjectInputStream in = new ObjectInputStream(
 						server.getInputStream());
 				Message messageFromClient = (Message) in.readObject();
-				System.out.println(messageFromClient.toString());
-				
-				// read the message
-				if (messageFromClient.getType().equals("Message")) {
-					
+				if (messageFromClient == null) {
+
 				} else {
-					interpreter.processInstruction((Instruction) messageFromClient);
+					System.out.println(messageFromClient.toString());
+
+					// read the message
+					if (messageFromClient.getType().equals("Message")) {
+
+					} else {
+						interpreter
+								.processInstruction((Instruction) messageFromClient);
+					}
 				}
 
 				// sending reply
