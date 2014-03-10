@@ -12,9 +12,10 @@ public enum Keyword {
 	LIBRARY("library", "deck"),
 	TRASH("trash", "grave", "waiting_room"),
 	MEMORY("out_of_game", "memory", "backyard"),
+	HAND("hand"),
 	LIFE("life"),
 	
-	LAND("land"), // Z/X and magic
+	LAND("land, resource"), // Z/X and magic
 	CHARGE("charge"), // Z/X
 	CLIMAX("climax"), // W/S
 	
@@ -31,14 +32,15 @@ public enum Keyword {
 	BACK_ROW_5("back_5"),
 	
 	/** Game phases */
+	UNTAP_PHASE("untap_phase"),
 	DRAW_PHASE("draw_phase"),
-	MAIN_PHASE("main_phase"),
-	ATTACK_PHASE("attack_phase"),
-	END_PHASE("end_phase"),
-	
-	CLIMAX_PHASE("climax_phase"), // W/S
 	RESOURCE_PHASE("resource_phase"), // Z/X
 	IGNITION_PHASE("ignition_phase"), // Z/X
+	MAIN_PHASE("main_phase"),
+	CLIMAX_PHASE("climax_phase"), // W/S
+	ATTACK_PHASE("attack_phase"), // W/S
+	END_PHASE("end_phase"),
+	
 	
 	/** Game actions */
 	DECK_TOP("top_of_deck"),
@@ -53,9 +55,11 @@ public enum Keyword {
 	ATTACK("attack"),
 	
 	UNTAP("untap", "reboot", "stand"),
+	TAP("rest", "tap"),
 	RESOURCE("resource"), // Z/X
 	IGNITION("ignition"), // Z/X
-	COUNTER("counter"),
+	COUNTER("counter"), 
+	DISCARD("discard")
 	
 	/** Game specific terms */
 	;
@@ -90,7 +94,7 @@ public enum Keyword {
 		for (String term : commonTerms) {
 			terms += term + " ";
 		}
-		return terms.trim();
+		return terms.trim().replace(" ", "/");
 	}
 
 	/**

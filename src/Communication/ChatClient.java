@@ -8,8 +8,11 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import BuildDeck.Card;
 import PlayGame.InstructionInterpreter;
 import PlayGame.Keyword;
+import PlayGame.Zone;
+import Profile.Player;
 
 /**
  * @author Frank Chen
@@ -24,8 +27,8 @@ public class ChatClient extends Thread {
 	private InstructionInterpreter interpreter;
 
 	public ChatClient(String serverName, int port) {
-		this.port = port;
-		this.serverName = serverName;
+		this.setPort(port);
+		this.setServerName(serverName);
 		try {
 			System.out.println("Connecting to " + serverName + " on port "
 					+ port);
@@ -37,8 +40,14 @@ public class ChatClient extends Thread {
 			e.printStackTrace();
 		}
 		interpreter = new InstructionInterpreter();
-		Instruction testInstruction = new Instruction(null, null);
-		testInstruction.setAction(Keyword.FRONT_ROW_1);
+
+		Instruction testInstruction = new Instruction(
+				new Player("Test_Player"), null);
+		testInstruction.setAction(Keyword.DISCARD);
+		testInstruction.setCard(new Card("Test_Card"));
+		testInstruction.setSourceZone(new Zone(Keyword.HAND));
+		testInstruction.setTargetZone(new Zone(Keyword.TRASH));
+
 		writeMessage(testInstruction);
 	}
 
@@ -90,5 +99,35 @@ public class ChatClient extends Thread {
 		int port = 7777;
 		Thread t = new ChatClient("10.0.0.14", port);
 		t.start();
+	}
+
+	/**
+	 * @return the port
+	 */
+	public int getPort() {
+		return port;
+	}
+
+	/**
+	 * @param port
+	 *            the port to set
+	 */
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	/**
+	 * @return the serverName
+	 */
+	public String getServerName() {
+		return serverName;
+	}
+
+	/**
+	 * @param serverName
+	 *            the serverName to set
+	 */
+	public void setServerName(String serverName) {
+		this.serverName = serverName;
 	}
 }

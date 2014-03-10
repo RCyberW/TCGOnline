@@ -1,5 +1,6 @@
 package BuildDeck;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,7 +14,11 @@ import Profile.Player;
  * @version 0.1
  * @since 2014-01-01
  */
-public class Card {
+public class Card implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4807348862386578995L;
 	private HashMap<String, String> properties;
 	private ArrayList<Card> cloneCards;
 	private Zone associatedZone;
@@ -23,6 +28,14 @@ public class Card {
 
 	public Card() {
 		setProperties(new HashMap<String, String>());
+		setCloneCards(new ArrayList<Card>());
+		setCardID(UUID.randomUUID());
+	}
+
+	public Card(String name) {
+		HashMap<String, String> thisProp = new HashMap<String, String>();
+		thisProp.put("card_name", name);
+		setProperties(thisProp);
 		setCloneCards(new ArrayList<Card>());
 		setCardID(UUID.randomUUID());
 	}

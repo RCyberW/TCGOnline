@@ -1,5 +1,6 @@
 package PlayGame;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import Profile.Player;
@@ -9,12 +10,21 @@ import Profile.Player;
  * @version 0.1
  * @since 2014-01-01
  */
-public class Zone {
+public class Zone implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7366511024130652320L;
 	private Keyword zoneType;
 	private Player associatedPlayer;
 	private UUID zoneID;
 
 	public Zone() {
+		setZoneID(UUID.randomUUID());
+	}
+
+	public Zone(Keyword zoneType) {
+		setZoneType(zoneType);
 		setZoneID(UUID.randomUUID());
 	}
 
@@ -41,7 +51,8 @@ public class Zone {
 	}
 
 	/**
-	 * @param zoneID the zoneID to set
+	 * @param zoneID
+	 *            the zoneID to set
 	 */
 	public void setZoneID(UUID zoneID) {
 		this.zoneID = zoneID;
@@ -55,9 +66,14 @@ public class Zone {
 	}
 
 	/**
-	 * @param associatedPlayer the associatedPlayer to set
+	 * @param associatedPlayer
+	 *            the associatedPlayer to set
 	 */
 	public void setAssociatedPlayer(Player associatedPlayer) {
 		this.associatedPlayer = associatedPlayer;
+	}
+
+	public String toString() {
+		return getZoneType().toString();
 	}
 }

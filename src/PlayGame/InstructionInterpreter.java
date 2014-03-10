@@ -11,7 +11,7 @@ import Profile.Player;
 public class InstructionInterpreter {
 
 	private Player player;
-	
+
 	public void processInstruction(Instruction instruction) {
 		// process the instruction on how the card is to be placed
 		switch (instruction.getAction()) {
@@ -31,13 +31,17 @@ public class InstructionInterpreter {
 			endPhase(instruction);
 			break;
 		default:
-			System.out.println(instruction.getAction());
+			System.out.println(instruction.getSourcePlayer() + " "
+					+ instruction.getAction() + " from "
+					+ instruction.getSourceZone() + " to "
+					+ instruction.getTargetZone());
 			break;
 		}
 	}
 
 	public void drawPhase(Instruction instruction) {
-		instruction.getSourcePlayer().getCurrentDeck().draw(instruction.getCard());
+		instruction.getSourcePlayer().getCurrentDeck()
+				.draw(instruction.getCard());
 	}
 
 	public void mainPhase(Instruction instruction) {
@@ -55,7 +59,7 @@ public class InstructionInterpreter {
 	}
 
 	public void draw() {
-		
+
 	}
 
 	/**
@@ -66,7 +70,8 @@ public class InstructionInterpreter {
 	}
 
 	/**
-	 * @param player the player to set
+	 * @param player
+	 *            the player to set
 	 */
 	public void setPlayer(Player player) {
 		this.player = player;

@@ -22,7 +22,10 @@ public class Instruction extends Message {
 	private Zone sourceZone;
 	private Zone targetZone;
 	private Card card;
-	private HashMap<String, String> instructionProperties;
+	private HashMap<String, String> instructionProperties; // other properties
+															// of the
+															// instruction (i.e.
+															// number of cards)
 
 	public Instruction(Player sourcePlayer, Player targetPlayer) {
 		super(sourcePlayer, targetPlayer);

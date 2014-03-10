@@ -60,7 +60,7 @@ public class Connector extends Thread {
 						server.getInputStream());
 				Message messageFromClient = (Message) in.readObject();
 				if (messageFromClient == null) {
-
+					System.out.println("RECIEVED NULL MESSAGE FROM CLIENT");
 				} else {
 					System.out.println(messageFromClient.toString());
 
