@@ -1,9 +1,10 @@
-package Profile;
+package playerProfile;
 
 import java.io.Serializable;
 import java.util.UUID;
 
-import BuildDeck.Deck;
+import deckComponents.Deck;
+
 
 /**
  * @author Frank Chen

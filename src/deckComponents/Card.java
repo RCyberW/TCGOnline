@@ -1,4 +1,6 @@
-package BuildDeck;
+package deckComponents;
+
+import gamePlay.Zone;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,8 +8,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.UUID;
 
-import PlayGame.Zone;
-import Profile.Player;
+import javax.swing.JLabel;
+
+import playerProfile.Player;
+
 
 /**
  * @author Frank Chen
@@ -158,5 +162,14 @@ public class Card implements Serializable {
 	 */
 	public String addProperty(String key, String detail) {
 		return properties.put(key, detail);
+	}
+	
+	public String toString() {
+		return getCardID().toString();
+	}
+
+	public JLabel grabImage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

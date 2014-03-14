@@ -1,4 +1,6 @@
-package Communication;
+package communication;
+
+import gamePlay.InstructionInterpreter;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,7 +13,6 @@ import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
-import PlayGame.InstructionInterpreter;
 
 /**
  * @author Frank Chen

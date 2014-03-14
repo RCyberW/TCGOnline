@@ -1,9 +1,10 @@
-package PlayGame;
+package gamePlay;
 
 import java.io.Serializable;
 import java.util.UUID;
 
-import Profile.Player;
+import playerProfile.Player;
+
 
 /**
  * @author Frank Chen

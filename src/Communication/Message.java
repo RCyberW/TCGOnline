@@ -1,8 +1,9 @@
-package Communication;
+package communication;
 
 import java.io.Serializable;
 
-import Profile.Player;
+import playerProfile.Player;
+
 
 /**
  * @author Frank Chen

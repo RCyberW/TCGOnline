@@ -1,11 +1,14 @@
-package Communication;
+package communication;
+
+import gamePlay.Keyword;
+import gamePlay.Zone;
 
 import java.util.HashMap;
 
-import BuildDeck.Card;
-import PlayGame.Keyword;
-import PlayGame.Zone;
-import Profile.Player;
+import playerProfile.Player;
+
+import deckComponents.Card;
+
 
 /**
  * @author Frank Chen

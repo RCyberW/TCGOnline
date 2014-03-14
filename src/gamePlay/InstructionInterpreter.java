@@ -1,7 +1,8 @@
-package PlayGame;
+package gamePlay;
 
-import Communication.Instruction;
-import Profile.Player;
+import playerProfile.Player;
+import communication.Instruction;
+
 
 /**
  * @author Frank Chen

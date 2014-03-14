@@ -1,4 +1,4 @@
-package PlayGame;
+package gamePlay;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @since 2014-01-01
  */
 public enum Keyword {
-	/** Field zone names */
+	/* Field zone names */
 	LIBRARY("library", "deck"),
 	TRASH("trash", "grave", "waiting_room"),
 	MEMORY("out_of_game", "memory", "backyard"),
@@ -31,7 +31,7 @@ public enum Keyword {
 	BACK_ROW_4("back_4"),
 	BACK_ROW_5("back_5"),
 	
-	/** Game phases */
+	/* Game phases */
 	UNTAP_PHASE("untap_phase"),
 	DRAW_PHASE("draw_phase"),
 	RESOURCE_PHASE("resource_phase"), // Z/X
@@ -42,7 +42,7 @@ public enum Keyword {
 	END_PHASE("end_phase"),
 	
 	
-	/** Game actions */
+	/* Game actions */
 	DECK_TOP("top_of_deck"),
 	DECK_BOTTOM("bottom_of_deck"),
 	DECK_SEARCH("search_deck"),
@@ -61,7 +61,7 @@ public enum Keyword {
 	COUNTER("counter"), 
 	DISCARD("discard")
 	
-	/** Game specific terms */
+	/* Game specific terms */
 	;
 	
 	private ArrayList<String> commonTerms;

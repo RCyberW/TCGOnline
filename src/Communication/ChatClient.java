@@ -1,4 +1,8 @@
-package Communication;
+package communication;
+
+import gamePlay.InstructionInterpreter;
+import gamePlay.Keyword;
+import gamePlay.Zone;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,11 +12,10 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import BuildDeck.Card;
-import PlayGame.InstructionInterpreter;
-import PlayGame.Keyword;
-import PlayGame.Zone;
-import Profile.Player;
+import playerProfile.Player;
+
+import deckComponents.Card;
+
 
 /**
  * @author Frank Chen

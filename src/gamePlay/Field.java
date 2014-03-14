@@ -1,10 +1,12 @@
-package PlayGame;
+package gamePlay;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import BuildDeck.Deck;
-import Profile.Player;
+import playerProfile.Player;
+
+import deckComponents.Deck;
+
 
 /**
  * @author Frank Chen

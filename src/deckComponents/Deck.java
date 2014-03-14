@@ -1,9 +1,10 @@
-package BuildDeck;
+package deckComponents;
+
+import gamePlay.Zone;
 
 import java.util.HashMap;
 import java.util.UUID;
 
-import PlayGame.Zone;
 
 /**
  * @author Frank Chen
