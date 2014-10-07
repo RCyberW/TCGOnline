@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import playerProfile.Player;
 
-
 /**
  * @author Frank Chen
  * @version 0.1
@@ -37,8 +36,7 @@ public class Zone implements Serializable {
 	}
 
 	/**
-	 * @param zoneType
-	 *            the zoneType to set
+	 * @param zoneType the zoneType to set
 	 */
 	public void setZoneType(Keyword zoneType) {
 		this.zoneType = zoneType;
@@ -52,8 +50,7 @@ public class Zone implements Serializable {
 	}
 
 	/**
-	 * @param zoneID
-	 *            the zoneID to set
+	 * @param zoneID the zoneID to set
 	 */
 	public void setZoneID(UUID zoneID) {
 		this.zoneID = zoneID;
@@ -67,8 +64,7 @@ public class Zone implements Serializable {
 	}
 
 	/**
-	 * @param associatedPlayer
-	 *            the associatedPlayer to set
+	 * @param associatedPlayer the associatedPlayer to set
 	 */
 	public void setAssociatedPlayer(Player associatedPlayer) {
 		this.associatedPlayer = associatedPlayer;

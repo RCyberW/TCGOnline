@@ -1,4 +1,4 @@
-package communication;
+package communicationProtocol;
 
 import gamePlay.Keyword;
 import gamePlay.Zone;
@@ -8,7 +8,6 @@ import java.util.HashMap;
 import playerProfile.Player;
 
 import deckComponents.Card;
-
 
 /**
  * @author Frank Chen
@@ -26,9 +25,10 @@ public class Instruction extends Message {
 	private Zone targetZone;
 	private Card card;
 	private HashMap<String, String> instructionProperties; // other properties
-															// of the
-															// instruction (i.e.
-															// number of cards)
+
+	// of the
+	// instruction (i.e.
+	// number of cards)
 
 	public Instruction(Player sourcePlayer, Player targetPlayer) {
 		super(sourcePlayer, targetPlayer);
@@ -43,9 +43,8 @@ public class Instruction extends Message {
 		setSourceZone(srcZone);
 		setTargetZone(trgZone);
 		super.setChatMessage(card.getProperties().get("Name") + " "
-				+ action.toString() + " FROM "
-				+ srcZone.getZoneType().toString() + " TO "
-				+ trgZone.getZoneType().toString());
+				+ action.toString() + " FROM " + srcZone.getZoneType().toString()
+				+ " TO " + trgZone.getZoneType().toString());
 	}
 
 	/**
@@ -56,8 +55,7 @@ public class Instruction extends Message {
 	}
 
 	/**
-	 * @param keyword
-	 *            the keyword to set
+	 * @param keyword the keyword to set
 	 */
 	public void setAction(Keyword keyword) {
 		this.action = keyword;
@@ -71,8 +69,7 @@ public class Instruction extends Message {
 	}
 
 	/**
-	 * @param card
-	 *            the card to set
+	 * @param card the card to set
 	 */
 	public void setCard(Card card) {
 		this.card = card;
@@ -86,8 +83,7 @@ public class Instruction extends Message {
 	}
 
 	/**
-	 * @param instructionProperties
-	 *            the instructionProperties to set
+	 * @param instructionProperties the instructionProperties to set
 	 */
 	public void setInstructionProperties(
 			HashMap<String, String> instructionProperties) {
@@ -95,10 +91,8 @@ public class Instruction extends Message {
 	}
 
 	/**
-	 * @param key
-	 *            the type of the property
-	 * @param detail
-	 *            the specific value of the property
+	 * @param key the type of the property
+	 * @param detail the specific value of the property
 	 */
 	public String addProperty(String key, String detail) {
 		return instructionProperties.put(key, detail);
@@ -116,8 +110,7 @@ public class Instruction extends Message {
 	}
 
 	/**
-	 * @param sourceZone
-	 *            the sourceZone to set
+	 * @param sourceZone the sourceZone to set
 	 */
 	public void setSourceZone(Zone sourceZone) {
 		this.sourceZone = sourceZone;
@@ -131,8 +124,7 @@ public class Instruction extends Message {
 	}
 
 	/**
-	 * @param targetZone
-	 *            the targetZone to set
+	 * @param targetZone the targetZone to set
 	 */
 	public void setTargetZone(Zone targetZone) {
 		this.targetZone = targetZone;

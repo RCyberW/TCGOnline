@@ -1,8 +1,5 @@
 package deckBuilderGUI;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -21,6 +18,7 @@ public class DeckBuilder extends JFrame {
 
 	/* Reference objects */
 	private Card referenceCard;
+	private Card selectedCard;
 	private ArrayList<Card> allCards;
 	private ArrayList<Card> filteredCards;
 
@@ -98,8 +96,8 @@ public class DeckBuilder extends JFrame {
 	/**
 	 * Display the card information of the selected card
 	 * 
-	 * @param referenceCard
-	 *            selected card object from either the list or the image view
+	 * @param referenceCard selected card object from either the list or the image
+	 *          view
 	 */
 	private void createCardInfo(Card referenceCard) {
 		// TODO Auto-generated method stub
@@ -111,7 +109,16 @@ public class DeckBuilder extends JFrame {
 	 */
 	private void createListView() {
 		// TODO Auto-generated method stub
-		
+		Iterator<String> properties = referenceCard.getProperties().keySet()
+				.iterator();
+
+		while (properties.hasNext()) {
+			String property = properties.next();
+			String value = referenceCard.getProperties().get(property);
+			if (value.equals("YES")) {
+				// this property needs to be part of the list option
+			}
+		}
 	}
 
 	/**
@@ -134,24 +141,19 @@ public class DeckBuilder extends JFrame {
 					box.setAlignmentX(Box.LEFT_ALIGNMENT);
 				}
 				/*
-				final Card thisCard = filteredCards.get(i);
-				JLabel tempLab = thisCard.grabImage();
-				MouseListener listener = new MouseAdapter() {
-					public void mouseReleased(MouseEvent e) {
-
-						referenceCard = thisCard;
-						System.out.println("selected " + referenceCard);
-
-						if ((e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1)
-								|| (e.getClickCount() == 1 && e.getButton() == MouseEvent.BUTTON3)) {
-							referenceCard = thisCard;
-						}
-					}
-				};
-
-				tempLab.addMouseListener(listener);
-				box.add(tempLab);
-				*/
+				 * final Card thisCard = filteredCards.get(i); JLabel tempLab =
+				 * thisCard.grabImage(); MouseListener listener = new MouseAdapter() {
+				 * public void mouseReleased(MouseEvent e) {
+				 * 
+				 * selectedCard = thisCard; System.out.println("selected " +
+				 * referenceCard);
+				 * 
+				 * if ((e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1)
+				 * || (e.getClickCount() == 1 && e.getButton() == MouseEvent.BUTTON3)) {
+				 * referenceCard = thisCard; } } };
+				 * 
+				 * tempLab.addMouseListener(listener); box.add(tempLab);
+				 */
 
 			}
 			vbox.add(box);
@@ -159,7 +161,8 @@ public class DeckBuilder extends JFrame {
 			panel.add(vbox);
 		}
 		imageBox = new JScrollPane(panel);
-		imageBox.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		imageBox
+				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 	}
 
 	/**
@@ -169,12 +172,12 @@ public class DeckBuilder extends JFrame {
 		createSearchFields();
 		createImageIcons();
 		createListView();
-		createCardInfo(referenceCard);
+		createCardInfo(selectedCard);
 
 		contentBody = new JTabbedPane();
 		contentBody.add("List View", listBox);
 		contentBody.add("Image View", imageBox);
-		
+
 		add(searchBox);
 		add(contentBody);
 		add(detailBox);

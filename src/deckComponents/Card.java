@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 
 import playerProfile.Player;
 
-
 /**
  * @author Frank Chen
  * @version 0.1
@@ -45,8 +44,7 @@ public class Card implements Serializable {
 	}
 
 	/**
-	 * @param searchProperties
-	 *            the properties to match this card with
+	 * @param searchProperties the properties to match this card with
 	 * @return if this card matches specified properties
 	 */
 	public boolean isMatch(HashMap<String, String> searchProperties) {
@@ -57,8 +55,7 @@ public class Card implements Serializable {
 			String key = searchKeys.next();
 			String expectedValue = searchProperties.get(key);
 			String originalValue = properties.get(key);
-			isMatching = isMatching
-					&& expectedValue.equalsIgnoreCase(originalValue);
+			isMatching = isMatching && expectedValue.equalsIgnoreCase(originalValue);
 		}
 
 		return isMatching;
@@ -72,8 +69,7 @@ public class Card implements Serializable {
 	}
 
 	/**
-	 * @param properties
-	 *            the properties to set
+	 * @param properties the properties to set
 	 */
 	public void setProperties(HashMap<String, String> properties) {
 		this.properties = properties;
@@ -87,8 +83,7 @@ public class Card implements Serializable {
 	}
 
 	/**
-	 * @param cloneCards
-	 *            the cloneCards to set
+	 * @param cloneCards the cloneCards to set
 	 */
 	public void setCloneCards(ArrayList<Card> cloneCards) {
 		this.cloneCards = cloneCards;
@@ -102,8 +97,7 @@ public class Card implements Serializable {
 	}
 
 	/**
-	 * @param imageURL
-	 *            the imageURL to set
+	 * @param imageURL the imageURL to set
 	 */
 	public void setImageURL(String imageURL) {
 		this.imageURL = imageURL;
@@ -117,8 +111,7 @@ public class Card implements Serializable {
 	}
 
 	/**
-	 * @param associatedPlayer
-	 *            the associatedPlayer to set
+	 * @param associatedPlayer the associatedPlayer to set
 	 */
 	public void setAssociatedPlayer(Player associatedPlayer) {
 		this.associatedPlayer = associatedPlayer;
@@ -132,8 +125,7 @@ public class Card implements Serializable {
 	}
 
 	/**
-	 * @param cardID
-	 *            the cardID to set
+	 * @param cardID the cardID to set
 	 */
 	public void setCardID(UUID cardID) {
 		this.cardID = cardID;
@@ -147,23 +139,20 @@ public class Card implements Serializable {
 	}
 
 	/**
-	 * @param associatedZone
-	 *            the associatedZone to set
+	 * @param associatedZone the associatedZone to set
 	 */
 	public void setAssociatedZone(Zone associatedZone) {
 		this.associatedZone = associatedZone;
 	}
 
 	/**
-	 * @param key
-	 *            the field of the card
-	 * @param detail
-	 *            the specific text to the field
+	 * @param key the field of the card
+	 * @param detail the specific text to the field
 	 */
 	public String addProperty(String key, String detail) {
 		return properties.put(key, detail);
 	}
-	
+
 	public String toString() {
 		return getCardID().toString();
 	}

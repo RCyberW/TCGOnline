@@ -1,4 +1,4 @@
-package communication;
+package communicationProtocol;
 
 import gamePlay.InstructionInterpreter;
 import gamePlay.Keyword;
@@ -16,7 +16,6 @@ import playerProfile.Player;
 
 import deckComponents.Card;
 
-
 /**
  * @author Frank Chen
  * @version 0.1
@@ -33,8 +32,7 @@ public class ChatClient extends Thread {
 		this.setPort(port);
 		this.setServerName(serverName);
 		try {
-			System.out.println("Connecting to " + serverName + " on port "
-					+ port);
+			System.out.println("Connecting to " + serverName + " on port " + port);
 			clientSocket = new Socket(serverName, port);
 
 		} catch (UnknownHostException e) {
@@ -44,8 +42,8 @@ public class ChatClient extends Thread {
 		}
 		interpreter = new InstructionInterpreter();
 
-		Instruction testInstruction = new Instruction(
-				new Player("Test_Player"), null);
+		Instruction testInstruction = new Instruction(new Player("Test_Player"),
+				null);
 		testInstruction.setAction(Keyword.DISCARD);
 		testInstruction.setCard(new Card("Test_Card"));
 		testInstruction.setSourceZone(new Zone(Keyword.HAND));
@@ -80,14 +78,12 @@ public class ChatClient extends Thread {
 			if (messageFromServer == null) {
 
 			} else {
-				System.out.println("Server says "
-						+ messageFromServer.toString());
+				System.out.println("Server says " + messageFromServer.toString());
 
 				// read the message
 				if (messageFromServer.getType().equals("Message")) {
 				} else {
-					interpreter
-							.processInstruction((Instruction) messageFromServer);
+					interpreter.processInstruction((Instruction) messageFromServer);
 				}
 			}
 
@@ -112,8 +108,7 @@ public class ChatClient extends Thread {
 	}
 
 	/**
-	 * @param port
-	 *            the port to set
+	 * @param port the port to set
 	 */
 	public void setPort(int port) {
 		this.port = port;
@@ -127,8 +122,7 @@ public class ChatClient extends Thread {
 	}
 
 	/**
-	 * @param serverName
-	 *            the serverName to set
+	 * @param serverName the serverName to set
 	 */
 	public void setServerName(String serverName) {
 		this.serverName = serverName;

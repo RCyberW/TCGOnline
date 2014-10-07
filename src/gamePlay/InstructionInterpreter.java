@@ -1,8 +1,8 @@
 package gamePlay;
 
-import playerProfile.Player;
-import communication.Instruction;
+import communicationProtocol.Instruction;
 
+import playerProfile.Player;
 
 /**
  * @author Frank Chen
@@ -33,16 +33,14 @@ public class InstructionInterpreter {
 			break;
 		default:
 			System.out.println(instruction.getSourcePlayer() + " "
-					+ instruction.getAction() + " from "
-					+ instruction.getSourceZone() + " to "
-					+ instruction.getTargetZone());
+					+ instruction.getAction() + " from " + instruction.getSourceZone()
+					+ " to " + instruction.getTargetZone());
 			break;
 		}
 	}
 
 	public void drawPhase(Instruction instruction) {
-		instruction.getSourcePlayer().getCurrentDeck()
-				.draw(instruction.getCard());
+		instruction.getSourcePlayer().getCurrentDeck().draw(instruction.getCard());
 	}
 
 	public void mainPhase(Instruction instruction) {
@@ -71,8 +69,7 @@ public class InstructionInterpreter {
 	}
 
 	/**
-	 * @param player
-	 *            the player to set
+	 * @param player the player to set
 	 */
 	public void setPlayer(Player player) {
 		this.player = player;

@@ -1,4 +1,4 @@
-package communication;
+package communicationProtocol;
 
 import gamePlay.InstructionInterpreter;
 
@@ -12,7 +12,6 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
-
 
 /**
  * @author Frank Chen
@@ -57,8 +56,7 @@ public class Connector extends Thread {
 						+ server.getRemoteSocketAddress());
 
 				// receiving request
-				ObjectInputStream in = new ObjectInputStream(
-						server.getInputStream());
+				ObjectInputStream in = new ObjectInputStream(server.getInputStream());
 				Message messageFromClient = (Message) in.readObject();
 				if (messageFromClient == null) {
 					System.out.println("RECIEVED NULL MESSAGE FROM CLIENT");
@@ -69,8 +67,7 @@ public class Connector extends Thread {
 					if (messageFromClient.getType().equals("Message")) {
 
 					} else {
-						interpreter
-								.processInstruction((Instruction) messageFromClient);
+						interpreter.processInstruction((Instruction) messageFromClient);
 					}
 				}
 

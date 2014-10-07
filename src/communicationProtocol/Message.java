@@ -1,16 +1,15 @@
-package communication;
+package communicationProtocol;
 
 import java.io.Serializable;
 
 import playerProfile.Player;
-
 
 /**
  * @author Frank Chen
  * @version 0.1
  * @since 2014-01-01
  */
-public class Message implements Serializable{
+public class Message implements Serializable {
 
 	/**
 	 * 
@@ -19,7 +18,7 @@ public class Message implements Serializable{
 	protected Player sourcePlayer;
 	protected Player targetPlayer;
 	protected String chatMessage;
-	
+
 	public Message(Player sourcePlayer, Player targetPlayer) {
 		setSourcePlayer(sourcePlayer);
 		setTargetPlayer(targetPlayer);
@@ -33,8 +32,7 @@ public class Message implements Serializable{
 	}
 
 	/**
-	 * @param chatMessage
-	 *            the chatMessage to set
+	 * @param chatMessage the chatMessage to set
 	 */
 	public void setChatMessage(String chatMessage) {
 		this.chatMessage = chatMessage;
@@ -48,8 +46,7 @@ public class Message implements Serializable{
 	}
 
 	/**
-	 * @param associatedPlayer
-	 *            the associatedPlayer to set
+	 * @param associatedPlayer the associatedPlayer to set
 	 */
 	public void setSourcePlayer(Player associatedPlayer) {
 		this.sourcePlayer = associatedPlayer;
@@ -68,11 +65,11 @@ public class Message implements Serializable{
 	public void setTargetPlayer(Player targetPlayer) {
 		this.targetPlayer = targetPlayer;
 	}
-	
+
 	public String toString() {
 		return "";
 	}
-	
+
 	public String getType() {
 		return "Message";
 	}
