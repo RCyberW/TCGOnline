@@ -8,6 +8,9 @@ import java.util.HashMap;
 import deckComponents.Card;
 
 /**
+ * Import new card data information to create a serialized file that contains
+ * all the card data
+ * 
  * @author Frank Chen
  * @version 0.1
  * @since 2014-09-01

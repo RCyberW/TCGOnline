@@ -17,6 +17,7 @@ import playerProfile.Player;
  * @version 0.1
  * @since 2014-01-01
  */
+
 public class Card implements Serializable {
 	/**
 	 * 
@@ -28,6 +29,9 @@ public class Card implements Serializable {
 	private String imageURL;
 	private Player associatedPlayer;
 	private UUID cardID;
+	
+	private String cardName;
+	private String cardRule;
 
 	public Card() {
 		setProperties(new HashMap<String, String>());
@@ -160,5 +164,33 @@ public class Card implements Serializable {
 	public JLabel grabImage() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/**
+	 * @return the cardName
+	 */
+	public String getCardName() {
+		return cardName;
+	}
+
+	/**
+	 * @param cardName the cardName to set
+	 */
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
+	}
+
+	/**
+	 * @return the cardRule
+	 */
+	public String getCardRule() {
+		return cardRule;
+	}
+
+	/**
+	 * @param cardRule the cardRule to set
+	 */
+	public void setCardRule(String cardRule) {
+		this.cardRule = cardRule;
 	}
 }

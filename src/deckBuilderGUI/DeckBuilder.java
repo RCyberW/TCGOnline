@@ -1,6 +1,5 @@
 package deckBuilderGUI;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.Box;
@@ -14,13 +13,21 @@ import javax.swing.ScrollPaneConstants;
 
 import deckComponents.Card;
 
+/**
+ * A dynamic deck builder that will change displayed information based on the
+ * type of card game specified
+ * 
+ * @author Frank Chen
+ * @version 0.1
+ * @since 2014-10-12
+ */
+
 public class DeckBuilder extends JFrame {
 
 	/* Reference objects */
-	private Card referenceCard;
+	private Controller gameController;
 	private Card selectedCard;
-	private ArrayList<Card> allCards;
-	private ArrayList<Card> filteredCards;
+	private String cardGameType;
 
 	/* Builder GUI */
 	private Box searchBox;
@@ -32,7 +39,7 @@ public class DeckBuilder extends JFrame {
 
 	/* Final variables */
 	final private int height = 600;
-	final private int width = (int) (height * 16 / 9);
+	final private int width = height * 16 / 9;
 
 	/**
 	 * 
@@ -49,50 +56,55 @@ public class DeckBuilder extends JFrame {
 		listBox = new JScrollPane();
 		detailBox = Box.createVerticalBox();
 
-		allCards = new ArrayList<Card>();
-		filteredCards = new ArrayList<Card>();
+		gameController = new Controller();
 
-		deserialize();
+		cardGameType = "SOME_SORT_CARD_GAME";
 
-		if (allCards != null && allCards.size() > 0) {
-			referenceCard = allCards.get(0);
-		} else {
-			referenceCard = new Card("SAMPLE_CARD");
-			filteredCards.add(referenceCard);
-		}
+		setTitle(cardGameType);
 
 		setSize(width, height);
 		setResizable(false);
 	}
 
 	/**
-	 * De-serialize card list data to be used for reference
-	 */
-	private void deserialize() {
-		// TODO Auto-generated method stub
-		filteredCards = allCards;
-	}
-
-	/**
 	 * Create search fields for the specific game
 	 */
 	private void createSearchFields() {
-		Iterator<String> properties = referenceCard.getProperties().keySet()
+		Iterator<String> properties = gameController.getProperties().keySet()
 				.iterator();
+
+		int totalRows = gameController.getSearchRowCount();
+		Box[] rowBoxes = new Box[totalRows];
 
 		while (properties.hasNext()) {
 			String property = properties.next();
+			Integer row = gameController.getProperties().get(property);
+
+			Box thisBox = null;
+			if (rowBoxes[row] == null) {
+				rowBoxes[row] = Box.createHorizontalBox();
+			}
+			thisBox = rowBoxes[row];
 
 			JLabel propertyLabel = new JLabel(property);
 			JTextField propertyInput = new JTextField();
 			propertyLabel.setLabelFor(propertyInput);
 
-			searchBox.add(Box.createHorizontalStrut(5));
-			searchBox.add(propertyLabel);
-			searchBox.add(propertyInput);
+			thisBox.add(Box.createHorizontalStrut(5));
+			thisBox.add(propertyLabel);
+			thisBox.add(propertyInput);
+		}
+
+		for (int i = 0; i < rowBoxes.length; ++i) {
+			searchBox.add(rowBoxes[i]);
 		}
 	}
 
+	private String createSearchQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	/**
 	 * Display the card information of the selected card
 	 * 
@@ -100,61 +112,39 @@ public class DeckBuilder extends JFrame {
 	 *          view
 	 */
 	private void createCardInfo(Card referenceCard) {
-		// TODO Auto-generated method stub
-
+		// TODO Get the card detail pane from the controller
+		detailBox = gameController.getDetailedView(referenceCard);
 	}
 
 	/**
 	 * Display the card list of the search result
 	 */
 	private void createListView() {
-		// TODO Auto-generated method stub
-		Iterator<String> properties = referenceCard.getProperties().keySet()
-				.iterator();
-
-		while (properties.hasNext()) {
-			String property = properties.next();
-			String value = referenceCard.getProperties().get(property);
-			if (value.equals("YES")) {
-				// this property needs to be part of the list option
-			}
-		}
+		// TODO get full list view from controller
+		listBox = gameController.getQueryListView(createSearchQuery());
 	}
 
 	/**
 	 * Display the card image pane of the search result
+	 * TODO TBD
 	 */
 	private void createImageIcons() {
-		// TODO Auto-generated method stub
 		JPanel panel = new JPanel();
 		Box box = Box.createHorizontalBox();
 		box.setAlignmentX(Box.LEFT_ALIGNMENT);
 		Box vbox = Box.createVerticalBox();
 		vbox.setAlignmentX(Box.LEFT_ALIGNMENT);
 
-		if (filteredCards.size() > MAX_RESULT_SHOWN) {
+		int filteredResultCount = gameController.getResultList().size();
+		
+		if (filteredResultCount > MAX_RESULT_SHOWN) {
 		} else {
-			for (int i = 0; i < filteredCards.size(); i++) {
+			for (int i = 0; i < filteredResultCount; i++) {
 				if (i % RESULT_PER_LINE == 0 && i > 0) {
 					vbox.add(box);
 					box = Box.createHorizontalBox();
 					box.setAlignmentX(Box.LEFT_ALIGNMENT);
 				}
-				/*
-				 * final Card thisCard = filteredCards.get(i); JLabel tempLab =
-				 * thisCard.grabImage(); MouseListener listener = new MouseAdapter() {
-				 * public void mouseReleased(MouseEvent e) {
-				 * 
-				 * selectedCard = thisCard; System.out.println("selected " +
-				 * referenceCard);
-				 * 
-				 * if ((e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1)
-				 * || (e.getClickCount() == 1 && e.getButton() == MouseEvent.BUTTON3)) {
-				 * referenceCard = thisCard; } } };
-				 * 
-				 * tempLab.addMouseListener(listener); box.add(tempLab);
-				 */
-
 			}
 			vbox.add(box);
 
@@ -176,10 +166,10 @@ public class DeckBuilder extends JFrame {
 
 		contentBody = new JTabbedPane();
 		contentBody.add("List View", listBox);
-		contentBody.add("Image View", imageBox);
+//		contentBody.add("Image View", imageBox);
 
 		add(searchBox);
-		add(contentBody);
+		add(listBox);
 		add(detailBox);
 	}
 
@@ -187,7 +177,6 @@ public class DeckBuilder extends JFrame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		DeckBuilder builder = new DeckBuilder();
 		builder.init();
 
@@ -195,5 +184,4 @@ public class DeckBuilder extends JFrame {
 		builder.setLocationRelativeTo(null);
 		builder.setVisible(true);
 	}
-
 }
