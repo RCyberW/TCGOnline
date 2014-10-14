@@ -17,7 +17,7 @@ import deckComponents.Card;
  * @since 2014-10-12
  */
 
-public class Controller {
+public abstract class Controller {
 
 	private HashMap<String, Integer> gameFieldProperties;
 	private ArrayList<Card> resultList;
@@ -83,22 +83,11 @@ public class Controller {
 	 * Subclasses to override
 	 */
 	
-	private void deserialize() {
-		// TODO Auto-generated method stub
-	}
+	public abstract void deserialize();
 	
-	public Box getDetailedView(Card referenceCard) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract Box getDetailedView(Card referenceCard);
 	
-	public JScrollPane getQueryListView(String query) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract  JScrollPane getQueryListView(String query);
 	
-	public Box getDeckListView(Card referenceCard) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract  Box getDeckListView(Card referenceCard);
 }

@@ -1,5 +1,10 @@
 package deckBuilderGUI;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.swing.Box;
@@ -28,6 +33,7 @@ public class DeckBuilder extends JFrame {
 	private Controller gameController;
 	private Card selectedCard;
 	private String cardGameType;
+	private HashMap<String, Controller> gameControllerMap;
 
 	/* Builder GUI */
 	private Box searchBox;
@@ -51,19 +57,46 @@ public class DeckBuilder extends JFrame {
 	public DeckBuilder() {
 		super("Some sort of deck builder");
 
+		cardGameType = "SOME_SORT_CARD_GAME";
+
 		searchBox = Box.createVerticalBox();
 		imageBox = new JScrollPane();
 		listBox = new JScrollPane();
 		detailBox = Box.createVerticalBox();
 
-		gameController = new Controller();
-
-		cardGameType = "SOME_SORT_CARD_GAME";
+		gameController = createGameControllerMap();
 
 		setTitle(cardGameType);
-
 		setSize(width, height);
 		setResizable(false);
+	}
+
+	public Controller createGameControllerMap() {
+		gameControllerMap = new HashMap<String, Controller>();
+		gameControllerMap.put("Weiss Schwarz", new WeissSchwarzController());
+
+//		InputStream fileInput;
+//		ObjectInputStream objectInput;
+//
+//		try {
+//			System.out.println("Opening data");
+//			fileInput = getClass().getResourceAsStream("/resources/GameControllers");
+//			objectInput = new ObjectInputStream(fileInput);
+//
+//			gameControllerMap = (HashMap<String, Controller>) objectInput
+//					.readObject();
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+
+		gameController = gameControllerMap.get(cardGameType);
+		if (gameController == null)
+			return gameControllerMap.get("Weiss Schwarz");
+		else
+			return gameController;
 	}
 
 	/**
@@ -93,6 +126,8 @@ public class DeckBuilder extends JFrame {
 			thisBox.add(Box.createHorizontalStrut(5));
 			thisBox.add(propertyLabel);
 			thisBox.add(propertyInput);
+			
+			System.out.printf("Creating search field for element %s at row %d\n", property, row);
 		}
 
 		for (int i = 0; i < rowBoxes.length; ++i) {
@@ -104,7 +139,7 @@ public class DeckBuilder extends JFrame {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	/**
 	 * Display the card information of the selected card
 	 * 
@@ -125,8 +160,7 @@ public class DeckBuilder extends JFrame {
 	}
 
 	/**
-	 * Display the card image pane of the search result
-	 * TODO TBD
+	 * Display the card image pane of the search result TODO TBD
 	 */
 	private void createImageIcons() {
 		JPanel panel = new JPanel();
@@ -136,7 +170,7 @@ public class DeckBuilder extends JFrame {
 		vbox.setAlignmentX(Box.LEFT_ALIGNMENT);
 
 		int filteredResultCount = gameController.getResultList().size();
-		
+
 		if (filteredResultCount > MAX_RESULT_SHOWN) {
 		} else {
 			for (int i = 0; i < filteredResultCount; i++) {
@@ -166,7 +200,7 @@ public class DeckBuilder extends JFrame {
 
 		contentBody = new JTabbedPane();
 		contentBody.add("List View", listBox);
-//		contentBody.add("Image View", imageBox);
+// contentBody.add("Image View", imageBox);
 
 		add(searchBox);
 		add(listBox);
