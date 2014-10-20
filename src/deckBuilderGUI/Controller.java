@@ -19,7 +19,7 @@ import deckComponents.Card;
 
 public abstract class Controller {
 
-	private HashMap<String, Integer> gameFieldProperties;
+	private ArrayList<UIComponentInfo> gameFieldProperties;
 	private ArrayList<Card> resultList;
 	private int searchRowCount;
 	
@@ -28,7 +28,7 @@ public abstract class Controller {
 	 */
 	
 	public Controller() {
-		gameFieldProperties = new HashMap<String, Integer>();
+		gameFieldProperties = new ArrayList<UIComponentInfo>();
 		resultList = new ArrayList<Card>();
 		searchRowCount = 0;
 		
@@ -53,7 +53,7 @@ public abstract class Controller {
 	 * @return a map of properties that is associated with the game to the row in
 	 *         which would be used to search
 	 */
-	public HashMap<String, Integer> getProperties() {
+	public ArrayList<UIComponentInfo> getProperties() {
 		return gameFieldProperties;
 	}
 
@@ -61,7 +61,7 @@ public abstract class Controller {
 	 * @param gameFieldProperties the name of the card properties for the game to
 	 *          the row in which the search input would be displayed on
 	 */
-	public void setProperties(HashMap<String, Integer> gameFieldProperties) {
+	public void setProperties(ArrayList<UIComponentInfo> gameFieldProperties) {
 		this.gameFieldProperties = gameFieldProperties;
 	}
 	
@@ -87,7 +87,7 @@ public abstract class Controller {
 	
 	public abstract Box getDetailedView(Card referenceCard);
 	
-	public abstract  JScrollPane getQueryListView(String query);
+	public abstract  JScrollPane getQueryListView(HashMap<String, String> query);
 	
-	public abstract  Box getDeckListView(Card referenceCard);
+	public abstract  Box getDeckListView();
 }

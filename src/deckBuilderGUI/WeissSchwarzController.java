@@ -9,13 +9,14 @@ import java.util.HashMap;
 import javax.swing.Box;
 import javax.swing.JScrollPane;
 
+import deckBuilderGUI.UIComponentInfo.UIType;
 import deckComponents.Card;
 
 public class WeissSchwarzController extends Controller {
 
 	public WeissSchwarzController() {
 		super();
-		createSearchMap();
+		createSearchPositionMap();
 	}
 	
 	@Override
@@ -47,7 +48,7 @@ public class WeissSchwarzController extends Controller {
 	}
 
 	@Override
-	public JScrollPane getQueryListView(String query) {
+	public JScrollPane getQueryListView(HashMap<String, String> query) {
 		// TODO Auto-generated method stub
 		JScrollPane scrollListView = new JScrollPane();
 
@@ -55,20 +56,30 @@ public class WeissSchwarzController extends Controller {
 	}
 
 	@Override
-	public Box getDeckListView(Card referenceCard) {
+	public Box getDeckListView() {
 		// TODO Auto-generated method stub
-		Box deckListView = Box.createVerticalBox();
+		Box deckListView = Box.createHorizontalBox();
 
 		return deckListView;
 	}
 	
-	public void createSearchMap() {
-		HashMap<String, Integer> searchMap = new HashMap<String, Integer>();
+	public void createSearchPositionMap() {
+		ArrayList<UIComponentInfo> componentList = new ArrayList<UIComponentInfo>();
 		
-		searchMap.put("name", 0);
+		componentList.add(new UIComponentInfo("Card ID", UIType.INPUT, 0, null));
+		componentList.add(new UIComponentInfo("Card Name", UIType.INPUT, 0, null));
+		componentList.add(new UIComponentInfo("Color", UIType.DROPDOWN, 0, new String[]{"Yellow", "Green", "Red", "Blue"}));
+		componentList.add(new UIComponentInfo("Type", UIType.DROPDOWN, 0, new String[]{"Character", "Event", "Climax"}));
+		componentList.add(new UIComponentInfo("Trigger", UIType.INPUT, 1, null));
+		componentList.add(new UIComponentInfo("Power", UIType.INPUT, 1, null));
+		componentList.add(new UIComponentInfo("Cost", UIType.INPUT, 1, null));
+		componentList.add(new UIComponentInfo("Soul", UIType.INPUT, 1, null));
+		componentList.add(new UIComponentInfo("Level", UIType.INPUT, 1, null));
+		componentList.add(new UIComponentInfo("Trait", UIType.INPUT, 1, null));
+		componentList.add(new UIComponentInfo("Ability", UIType.INPUT, 2, null));
 		
-		this.setProperties(searchMap);
-		this.setSearchRowCount(1);
+		this.setProperties(componentList);
+		this.setSearchRowCount(3);
 	}
 
 }
