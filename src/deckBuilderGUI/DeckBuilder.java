@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
@@ -53,6 +54,9 @@ public class DeckBuilder extends JFrame {
 	private Box detailBox;
 	private Box deckBox;
 
+	private JTable deckTable;
+	private JTable resultTable;
+
 	private JTabbedPane contentBody;
 
 	/* Final variables */
@@ -75,6 +79,7 @@ public class DeckBuilder extends JFrame {
 		imageBox = Box.createVerticalBox();
 		listBox = Box.createVerticalBox();
 		detailBox = Box.createVerticalBox();
+		deckBox = Box.createHorizontalBox();
 
 		gameController = createGameControllerMap();
 
@@ -158,19 +163,19 @@ public class DeckBuilder extends JFrame {
 				JComboBox propertyDropdown = new JComboBox(component.getSelections());
 				thisBox.add(Box.createHorizontalStrut(5));
 				thisBox.add(propertyDropdown);
-//				searchMap.put(property, propertyDropdown);
+// searchMap.put(property, propertyDropdown);
 				break;
 			case CHECKBOX:
 				JCheckBox propertyCheckbox = new JCheckBox();
 				thisBox.add(Box.createHorizontalStrut(5));
 				thisBox.add(propertyCheckbox);
-//				searchMap.put(property, propertyInput);
+// searchMap.put(property, propertyInput);
 				break;
 			default:
 				JTextField propertyInput = new JTextField();
 				thisBox.add(Box.createHorizontalStrut(5));
 				thisBox.add(propertyInput);
-//				searchMap.put(property, propertyInput);
+// searchMap.put(property, propertyInput);
 				break;
 			}
 // propertyLabel.setLabelFor(propertyInput);
@@ -262,13 +267,16 @@ public class DeckBuilder extends JFrame {
 	 * Display the card list of the search result
 	 */
 	private void createListView() {
-		// TODO get full list view from controller
-		JScrollPane resultScrollTable = gameController.getQueryListView(createSearchQuery());
-		listBox.setPreferredSize(new Dimension(width / 2, (int) (height * 0.7)));
+		// TODO Get full list view from controller
+		resultTable = gameController.getQueryListView(createSearchQuery());
+		JScrollPane resultScrollTable = new JScrollPane(resultTable);
 
-		listBox.add(new JLabel("Result count: "));
+		JLabel countLabel = new JLabel("Result count: 4");
 
+		listBox.add(countLabel);
 		listBox.add(resultScrollTable);
+
+		listBox.setPreferredSize(new Dimension(width / 2, (int) (height * 0.7)));
 		listBox.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createTitledBorder("Search Result"), null));
 	}
@@ -278,7 +286,13 @@ public class DeckBuilder extends JFrame {
 	 */
 	private void createDeckBoxView() {
 		// TODO Auto-generated method stub
-		deckBox = gameController.getDeckListView();
+
+		deckTable = gameController.getQueryListView(createSearchQuery());
+		JScrollPane deckScrollTable = new JScrollPane(deckTable);
+
+		deckBox.add(gameController.getDeckInfoPane());
+		deckBox.add(deckScrollTable);
+
 		deckBox.setPreferredSize(new Dimension(width, (int) (height * 0.3)));
 		deckBox.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("Deck"),
 				null));
@@ -306,9 +320,9 @@ public class DeckBuilder extends JFrame {
 				}
 			}
 			vbox.add(box);
-
 			panel.add(vbox);
 		}
+
 		JScrollPane imageScroll = new JScrollPane(panel);
 		imageScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		imageBox.add(imageScroll);

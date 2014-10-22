@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.swing.Box;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import deckComponents.Card;
 
@@ -87,7 +88,9 @@ public abstract class Controller {
 	
 	public abstract Box getDetailedView(Card referenceCard);
 	
-	public abstract  JScrollPane getQueryListView(HashMap<String, String> query);
+	public abstract JTable getQueryListView(HashMap<String, String> query);
 	
-	public abstract  Box getDeckListView();
+	public abstract JTable getDeckListView();
+	
+	public abstract Box getDeckInfoPane();
 }

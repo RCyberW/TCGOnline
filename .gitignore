@@ -171,3 +171,5 @@ CardDatav2
 src/DeckBuilder/CardDatav2
 *.llog
 *.dec
+src/dataImporting/generateDB_zxofficial.py
+src/dataImporting/grabHtml_zxofficial.py
