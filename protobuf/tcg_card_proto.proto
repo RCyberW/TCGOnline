@@ -1,0 +1,172 @@
+package tcg;
+
+option java_package = "tcg";
+option java_outer_classname = "CardProtos";
+
+message Card {
+  required string game_name = 1;
+  optional string name = 2;
+  optional string path_to_image = 3;
+  optional string uuid = 4;
+
+  // This field should only be set if this Card is being used in a deck list.
+  optional uint32 quantity = 5;
+  extensions 100 to max;
+}
+
+// Used as a list to all of the cards for a particular game
+message CardCollection {
+  required string game_name = 1;
+  repeated Card cards = 2;
+}
+
+message Deck {
+  required string game_name = 1;
+  optional string name = 2;
+  repeated Card cards = 3;
+}
+
+// Fields for Weiss Schwarz
+message WeissSchwarzCard {
+  enum Rarity {
+    COMMON = 0;
+    UNCOMMON = 1;
+    RARE = 2;
+    DOUBLERARE = 3;
+  }
+  enum Side {
+    WEISS = 0;
+    SCHWARZ = 1;
+  }
+  enum Type {
+    CHARA = 0;
+    EVENT = 1;
+    CLIMAX = 2;
+  }
+  enum Color {
+    YELLOW = 0;
+    GREEN = 1;
+    RED = 2;
+    BLUE = 3;
+  }
+  enum Trigger {
+    SOUL = 0;
+    RETURN = 1;
+    SHOT = 2;
+    COMEBACK = 3;
+    TREASURE = 4;
+    POOL = 5;
+    DRAW = 6;
+    GATE = 7;
+  }
+  extend Card {
+    optional string name_furigana = 101;
+    // The following 3 make up the whole original card id
+    // (e.g. series_id + "/" + set_id + "-" + card_no)
+    optional string series_id = 102;
+    optional string set_id = 103;
+    optional string card_id = 104;
+    optional Rarity rarity = 105;
+    optional string expansion = 106;
+    optional Side side = 107;
+    optional Type type = 108;
+    optional Color color = 109;
+    optional uint32 level = 110;
+    optional uint32 cost = 111;
+    optional uint32 power = 112;
+    optional uint32 soul = 113;
+    repeated Trigger triggers = 114;
+    optional string trait1 = 115;
+    optional string trait2 = 116;
+    repeated string text = 117;
+    optional string flavor = 118;
+
+    // Not a field on the card itself.
+    optional string neo_standard_group = 119;
+  }
+}
+
+// Fields for Chaos TCG
+message ChaosCard {
+  enum Gender {
+    NONE = 0;
+    MALE = 1;
+    FEMALE = 2;
+    MALE_FEMALE = 3;
+  }
+  enum Rarity {
+    COMMON = 0;
+    UNCOMMON = 1;
+    RARE = 2;
+    DOUBLERARE = 3;
+  }
+  enum Type {
+    CHARA = 0;
+    EVENT = 1;
+    SET = 2;
+  }
+  enum Element {
+    FIRE = 0;
+    WATER = 1;
+    WIND = 2;
+    EARTH = 3;
+    LIGHT = 4;
+    DARK = 5;
+  }
+  extend Card {
+    optional string name_furigana = 201;
+    // The following 2 make up the whole original card id
+    // (e.g. series_id + "-" + card_id)
+    optional string series_id = 202;
+    optional string card_id = 203;
+    optional Gender gender = 204;
+    optional Rarity rarity = 205;
+    optional Type type = 206;
+    repeated Element elements = 207;
+    optional uint32 attack_power = 208;
+    optional uint32 defense_power = 209;
+    optional int32 attack_power_mod = 210;
+    optional int32 defense_power_mod = 211;
+    repeated string text = 212;
+    optional string flavor = 213;
+    optional string expansion = 214;
+    optional string series_title = 215;
+
+    // Not a field on the card itself.
+    optional string os = 216;
+  }
+}
+
+// Fields for Level Neo
+message LevelNeoCard {
+  enum Type {
+    CHARACTER = 0;
+    EVENT = 1;
+  }
+  enum Rarity {
+    COMMON = 0;
+    UNCOMMON = 1;
+    RARE = 2;
+    SUPER_RARE = 3;
+  }
+  enum Color {
+    BLUE = 0;
+    GREEN = 1;
+    YELLOW = 2;
+    RED = 3;
+  }
+  extend Card {
+    optional string title = 301;
+    optional string card_id = 302;
+    optional Type type = 303;
+    optional Rarity rarity = 304;
+    optional Color color = 305;
+    optional uint32 turn_cost = 306;
+    repeated Color color_cost = 307;
+    optional uint32 attack_points = 308;
+    optional string trait = 309;
+    repeated string text = 310;
+    optional string level_burst = 311;
+    optional string flavor_text = 312;
+  }
+}
