@@ -18,31 +18,31 @@ import deckComponents.Card;
 
 public class Importer {
 
-	/**
-	 * Items that will be serialized
-	 */
-	private HashMap<String, Card> binder;
+  /**
+   * Items that will be serialized
+   */
+  private HashMap<String, Card> binder;
 
-	/**
-	 * Serialize card data for future use
-	 */
-	public void serialize() {
-		FileOutputStream fileOutput;
-		ObjectOutputStream objectOutput;
-		try {
-			fileOutput = new FileOutputStream("src/resources/CardData");
-			objectOutput = new ObjectOutputStream(fileOutput);
+  /**
+   * Serialize card data for future use
+   */
+  public void serialize() {
+    FileOutputStream fileOutput;
+    ObjectOutputStream objectOutput;
+    try {
+      fileOutput = new FileOutputStream("src/resources/CardData");
+      objectOutput = new ObjectOutputStream(fileOutput);
 
-			objectOutput.writeObject(binder);
+      objectOutput.writeObject(binder);
 
-			objectOutput.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+      objectOutput.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
-	public void deserialize() {
+  public void deserialize() {
 
-	}
+  }
 
 }

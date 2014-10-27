@@ -1,5 +1,8 @@
 package deckBuilderGUI;
 
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -9,19 +12,21 @@ import java.util.HashMap;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 
 import deckBuilderGUI.UIComponentInfo.UIType;
 import deckComponents.Card;
 
 public class WeissSchwarzController extends Controller {
 
-	public WeissSchwarzController() {
-		super();
-		createSearchPositionMap();
-	}
+  public WeissSchwarzController() {
+    super();
+    createSearchPositionMap();
+  }
 
-	@Override
-	public void deserialize() {
+  @Override
+  public void deserialize() {
 // InputStream fileInput;
 // ObjectInputStream objectInput;
 //
@@ -38,101 +43,147 @@ public class WeissSchwarzController extends Controller {
 // } catch (ClassNotFoundException e) {
 // e.printStackTrace();
 // }
-	}
+  }
 
-	@Override
-	public Box getDetailedView(Card referenceCard) {
-		// TODO Auto-generated method stub
-		Box cardDetailView = Box.createVerticalBox();
+  @Override
+  public Box getDetailedView(Card referenceCard) {
+    // TODO Auto-generated method stub
+    Box cardDetailView = Box.createVerticalBox();
 
-		return cardDetailView;
-	}
+    return cardDetailView;
+  }
 
-	@Override
-	public JTable getQueryListView(HashMap<String, String> query) {
-		// TODO Auto-generated method stub
-		String[] columnNames = { "Card ID", "Name", "Color", "Type" };
-		String[][] dataSet = { { "00-000", "Anzu", "BLUE", "Chara" },
-				{ "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
-				{ "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
-				{ "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
-				{ "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
-				{ "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
-				{ "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
-				{ "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
-				{ "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
-				{ "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
-				{ "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
-				{ "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
-				{ "00-003", "Nanaka", "GREEN", "Chara" } };
+  @Override
+  public JTable getQueryListView(HashMap<String, String> query) {
+    // TODO Auto-generated method stub
+    String[] columnNames = { "Card ID", "Name", "Color", "Type" };
+    String[][] dataSet = { { "00-000", "Anzu", "BLUE", "Chara" },
+        { "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
+        { "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
+        { "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
+        { "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
+        { "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
+        { "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
+        { "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
+        { "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
+        { "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
+        { "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
+        { "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
+        { "00-003", "Nanaka", "GREEN", "Chara" } };
 
-		JTable listTable = new JTable(dataSet, columnNames);
+    JTable listTable = new JTable(dataSet, columnNames) {
+      /**
+			 * 
+			 */
+      private static final long serialVersionUID = -8791285381071866475L;
 
-		return listTable;
-	}
+      public boolean isCellEditable(int rowIndex, int colIndex) {
+        return false;
+      }
+    };
 
-	@Override
-	public JTable getDeckListView() {
-		// TODO Auto-generated method stub
-		String[] columnNames = { "Card ID", "Name", "Color", "Type" };
-		String[][] dataSet = { { "00-000", "Anzu", "BLUE", "Chara" },
-				{ "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
-				{ "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
-				{ "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
-				{ "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
-				{ "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
-				{ "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
-				{ "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
-				{ "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
-				{ "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
-				{ "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
-				{ "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
-				{ "00-003", "Nanaka", "GREEN", "Chara" }, { "00-000", "Anzu", "BLUE", "Chara" },
-				{ "00-001", "Otome", "YELLOW", "Chara" }, { "00-002", "Charles", "RED", "Chara" },
-				{ "00-003", "Nanaka", "GREEN", "Chara" } };
+    return listTable;
+  }
 
-		JTable listTable = new JTable(dataSet, columnNames);
+  @Override
+  public JTable getDeckListView() {
+    // TODO Auto-generated method stub
+    String[] columnNames = { "Card ID", "Name", "Color", "Type" };
+    Class<?>[] columnClasses = new Class<?>[columnNames.length];
 
-		return listTable;
-	}
+    for (int i = 0; i < columnClasses.length; i++) {
+      columnClasses[i] = columnNames[i].getClass();
+    }
 
-	@Override
-	public Box getDeckInfoPane() {
-		// TODO Auto-generated method stub
-		Box infoBox = Box.createVerticalBox();
+    ArrayList<Card> cardsInDeck = new ArrayList<Card>();
+    cardsInDeck.add(new Card("Otome"));
+    cardsInDeck.add(new Card("Anzu"));
+    cardsInDeck.add(new Card("Yume"));
+    cardsInDeck.add(new Card("Nemu"));
+    cardsInDeck.add(new Card("Sakura"));
+    cardsInDeck.add(new Card("Nanaka"));
+    cardsInDeck.add(new Card("Kotori"));
+    cardsInDeck.add(new Card("Otome!"));
+    cardsInDeck.add(new Card("Anzu!"));
+    cardsInDeck.add(new Card("Yume!"));
+    cardsInDeck.add(new Card("Nemu!"));
+    cardsInDeck.add(new Card("Sakura!"));
+    cardsInDeck.add(new Card("Nanaka!"));
+    cardsInDeck.add(new Card("Kotori!"));
 
-		JLabel yellowLabel = new JLabel("Yellow");
-		JLabel greenLabel = new JLabel("Green");
-		JLabel redLabel = new JLabel("Red");
-		JLabel blueLabel = new JLabel("Blue");
+    final ListTableModel listTableModel = new ListTableModel(columnNames, columnClasses,
+        cardsInDeck);
 
-		infoBox.add(yellowLabel);
-		infoBox.add(greenLabel);
-		infoBox.add(redLabel);
-		infoBox.add(blueLabel);
+    final JTable listTable = new JTable(listTableModel) {
+      /**
+			 * 
+			 */
+      private static final long serialVersionUID = 6813909761668112368L;
 
-		return infoBox;
-	}
+      public boolean isCellEditable(int rowIndex, int colIndex) {
+        return false;
+      }
+    };
 
-	public void createSearchPositionMap() {
-		ArrayList<UIComponentInfo> componentList = new ArrayList<UIComponentInfo>();
+    listTable.addMouseListener(new MouseAdapter() {
+      public void mousePressed(MouseEvent e) {
+        // Left mouse click
+        if (SwingUtilities.isLeftMouseButton(e)) {
+          // Do something
+        }
+        // Right mouse click
+        else if (SwingUtilities.isRightMouseButton(e)) {
+          // get the coordinates of the mouse click
+          Point p = e.getPoint();
 
-		componentList.add(new UIComponentInfo("Card ID", UIType.INPUT, 0, null));
-		componentList.add(new UIComponentInfo("Card Name", UIType.INPUT, 0, null));
-		componentList.add(new UIComponentInfo("Color", UIType.DROPDOWN, 0, new String[] { "Yellow",
-				"Green", "Red", "Blue" }));
-		componentList.add(new UIComponentInfo("Type", UIType.DROPDOWN, 0, new String[] { "Character",
-				"Event", "Climax" }));
-		componentList.add(new UIComponentInfo("Trigger", UIType.INPUT, 1, null));
-		componentList.add(new UIComponentInfo("Power", UIType.INPUT, 1, null));
-		componentList.add(new UIComponentInfo("Cost", UIType.INPUT, 1, null));
-		componentList.add(new UIComponentInfo("Soul", UIType.INPUT, 1, null));
-		componentList.add(new UIComponentInfo("Level", UIType.DROPDOWN, 1, new String[] { "0", "1",
-				"2", "3" }));
-		componentList.add(new UIComponentInfo("Trait", UIType.INPUT, 1, null));
-		componentList.add(new UIComponentInfo("Ability Text", UIType.INPUT, 2, null));
+          // get the row index that contains that coordinate
+          int rowNumber = listTable.rowAtPoint(p);
+          listTableModel.removeRow(rowNumber);
+          listTable.addNotify();
+        }
+      }
+    });
 
-		this.setProperties(componentList);
-		this.setSearchRowCount(3);
-	}
+    return listTable;
+  }
+
+  @Override
+  public Box getDeckInfoPane() {
+    // TODO Auto-generated method stub
+    Box infoBox = Box.createVerticalBox();
+
+    JLabel yellowLabel = new JLabel("Yellow");
+    JLabel greenLabel = new JLabel("Green");
+    JLabel redLabel = new JLabel("Red");
+    JLabel blueLabel = new JLabel("Blue");
+
+    infoBox.add(yellowLabel);
+    infoBox.add(greenLabel);
+    infoBox.add(redLabel);
+    infoBox.add(blueLabel);
+
+    return infoBox;
+  }
+
+  public void createSearchPositionMap() {
+    ArrayList<UIComponentInfo> componentList = new ArrayList<UIComponentInfo>();
+
+    componentList.add(new UIComponentInfo("Card ID", UIType.INPUT, 0, null));
+    componentList.add(new UIComponentInfo("Card Name", UIType.INPUT, 0, null));
+    componentList.add(new UIComponentInfo("Color", UIType.DROPDOWN, 0, new String[] { "Yellow",
+        "Green", "Red", "Blue" }));
+    componentList.add(new UIComponentInfo("Type", UIType.DROPDOWN, 0, new String[] { "Character",
+        "Event", "Climax" }));
+    componentList.add(new UIComponentInfo("Trigger", UIType.INPUT, 1, null));
+    componentList.add(new UIComponentInfo("Power", UIType.INPUT, 1, null));
+    componentList.add(new UIComponentInfo("Cost", UIType.INPUT, 1, null));
+    componentList.add(new UIComponentInfo("Soul", UIType.INPUT, 1, null));
+    componentList.add(new UIComponentInfo("Level", UIType.DROPDOWN, 1, new String[] { "0", "1",
+        "2", "3" }));
+    componentList.add(new UIComponentInfo("Trait", UIType.INPUT, 1, null));
+    componentList.add(new UIComponentInfo("Ability Text", UIType.INPUT, 2, null));
+
+    this.setProperties(componentList);
+    this.setSearchRowCount(3);
+  }
 }
