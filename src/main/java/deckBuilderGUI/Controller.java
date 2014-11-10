@@ -6,8 +6,11 @@ import java.util.HashMap;
 import javax.swing.Box;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.TableRowSorter;
 
-import deckComponents.Card;
+import tcg.CardProtos.Card;
+
+// import deckComponents.Card;
 
 /**
  * The master controller at telling the UI what components to display on each
@@ -23,6 +26,7 @@ public abstract class Controller {
   private ArrayList<UIComponentInfo> gameFieldProperties;
   private ArrayList<Card> resultList;
   private int searchRowCount;
+  private TableRowSorter<ListTableModel> cardSorter;
 
   /**
    * Do not override
@@ -78,6 +82,20 @@ public abstract class Controller {
    */
   public void setResultList(ArrayList<Card> resultList) {
     this.resultList = resultList;
+  }
+
+  /**
+   * @return the cardSorter
+   */
+  public TableRowSorter<ListTableModel> getCardSorter() {
+    return cardSorter;
+  }
+
+  /**
+   * @param cardSorter the cardSorter to set
+   */
+  public void setCardSorter(TableRowSorter<ListTableModel> cardSorter) {
+    this.cardSorter = cardSorter;
   }
 
   /**

@@ -27,7 +27,9 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import deckComponents.Card;
+import tcg.CardProtos.Card;
+
+//import deckComponents.Card;
 
 /**
  * A dynamic deck builder that will change displayed information based on the

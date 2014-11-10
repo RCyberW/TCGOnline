@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import deckComponents.Card;
+import tcg.CardProtos.Card;
+//import deckComponents.Card;
 
 public class ListTableModel extends AbstractTableModel {
 
@@ -31,7 +32,7 @@ public class ListTableModel extends AbstractTableModel {
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
     // TODO Auto-generated method stub
-    String c = cardList.get(rowIndex).getProperties().get("card_name");
+    String c = cardList.get(rowIndex).getName();
 
     return c;
   }
@@ -53,6 +54,10 @@ public class ListTableModel extends AbstractTableModel {
 
   public void removeRow(int row) {
     cardList.remove(row);
+  }
+
+  public Card getCard(int identifier) {
+    return cardList.get(identifier);
   }
 
 }

@@ -173,3 +173,4 @@ src/DeckBuilder/CardDatav2
 *.dec
 src/dataImporting/generateDB_zxofficial.py
 src/dataImporting/grabHtml_zxofficial.py
+/target/

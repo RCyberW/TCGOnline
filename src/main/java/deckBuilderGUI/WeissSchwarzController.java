@@ -16,7 +16,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 
 import deckBuilderGUI.UIComponentInfo.UIType;
-import deckComponents.Card;
+import tcg.CardProtos.Card;
+//import deckComponents.Card;
 
 public class WeissSchwarzController extends Controller {
 
@@ -96,20 +97,20 @@ public class WeissSchwarzController extends Controller {
     }
 
     ArrayList<Card> cardsInDeck = new ArrayList<Card>();
-    cardsInDeck.add(new Card("Otome"));
-    cardsInDeck.add(new Card("Anzu"));
-    cardsInDeck.add(new Card("Yume"));
-    cardsInDeck.add(new Card("Nemu"));
-    cardsInDeck.add(new Card("Sakura"));
-    cardsInDeck.add(new Card("Nanaka"));
-    cardsInDeck.add(new Card("Kotori"));
-    cardsInDeck.add(new Card("Otome!"));
-    cardsInDeck.add(new Card("Anzu!"));
-    cardsInDeck.add(new Card("Yume!"));
-    cardsInDeck.add(new Card("Nemu!"));
-    cardsInDeck.add(new Card("Sakura!"));
-    cardsInDeck.add(new Card("Nanaka!"));
-    cardsInDeck.add(new Card("Kotori!"));
+    
+    cardsInDeck.add(Card.newBuilder().build());
+    cardsInDeck.add(Card.newBuilder().build());
+    cardsInDeck.add(Card.newBuilder().build());
+    cardsInDeck.add(Card.newBuilder().build());
+    cardsInDeck.add(Card.newBuilder().build());
+    cardsInDeck.add(Card.newBuilder().build());
+    cardsInDeck.add(Card.newBuilder().build());
+    cardsInDeck.add(Card.newBuilder().build());
+    cardsInDeck.add(Card.newBuilder().build());
+    cardsInDeck.add(Card.newBuilder().build());
+    cardsInDeck.add(Card.newBuilder().build());
+    cardsInDeck.add(Card.newBuilder().build());
+    cardsInDeck.add(Card.newBuilder().build());
 
     final ListTableModel listTableModel = new ListTableModel(columnNames, columnClasses,
         cardsInDeck);

@@ -29,6 +29,8 @@ public class Card implements Serializable {
   private String imageURL;
   private Player associatedPlayer;
   private UUID cardID;
+  
+  private boolean isMatching;
 
   private String cardName;
   private String cardRule;
@@ -193,4 +195,20 @@ public class Card implements Serializable {
   public void setCardRule(String cardRule) {
     this.cardRule = cardRule;
   }
+
+  /**
+   * @return the isMatching
+   */
+  public boolean isMatching() {
+    return isMatching;
+  }
+
+  /**
+   * @param isMatching the isMatching to set
+   */
+  public void setMatching(boolean isMatching) {
+    this.isMatching = isMatching;
+  }
+
+ 
 }
